@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+  nginx:
+
+
+  superset:
+    build:
+      context: ./docker/superset
+    container_name: validol_superset
+    vloumes:
+      - superset_home:/app/superset_home
+    depends_on:
+      - db_init
+
+  loader:
+    env_file: ./docker/.env
+    build:
+      context: ./docker/loader
+    container_name: validol_loader_cron
+    command: sh /app/scripts/init.sh
+    volumes:
+      - ./docker/loader/scripts:/app/scripts
+    depends_on:
+      - db_init
+
+  db_init:
+    env_file: ./docker/.env
+    build:
+      context: ./docker/db_init
+    container_name: validol_db_init
+    command: sh /app/scripts/init.sh
+    volumes:
+      - ./docker/db_init/scripts:/app/scripts
+    depends_on:
+      - db
+
+  db:
+    env_file: ./docker/.env
+    image: postgres:12
+    container_name: validol_db
+    volumes:
+      - db_home:/var/lib/postgresql/data
+
+volumes:
+  db_home:
+    external: false
+  superset_home:
+    external: false

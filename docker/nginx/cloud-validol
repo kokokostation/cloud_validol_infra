@@ -1,0 +1,17 @@
+server {
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    ssl on;
+    ssl_certificate /etc/nginx/ssl/validol-cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/validol-key.pem;
+
+	server_name validol.net;
+
+    auth_basic           "Administrator’s Area";
+    auth_basic_user_file /etc/nginx/htpasswd;
+
+	location / {
+		proxy_pass http://superset:8088;
+	}
+}
