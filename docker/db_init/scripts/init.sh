@@ -1,6 +1,6 @@
 set -e
 
-CONN="dbname=$POSTGRES_DB host=db user=$POSTGRES_USER password=$POSTGRES_PASSWORD"
+CONN="dbname=$DATABASE_DB host=$DATABASE_HOST user=$DATABASE_USER password=$DATABASE_PASSWORD"
 
 until psql "$CONN" -c '\q'; do
   >&2 echo "Postgres is unavailable - sleeping"

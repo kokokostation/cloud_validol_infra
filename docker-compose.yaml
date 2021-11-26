@@ -17,7 +17,7 @@ services:
       - superset_home:/app/superset_home
 
   loader:
-    env_file: ./docker/.env
+    env_file: ./docker/loader/.env
     build:
       context: ./docker/loader
     container_name: validol_loader_cron
@@ -26,7 +26,7 @@ services:
       - ./docker/loader/scripts:/app/scripts
 
   db_init:
-    env_file: ./docker/.env
+    env_file: ./docker/db_init/.env
     build:
       context: ./docker/db_init
     container_name: validol_db_init
@@ -37,7 +37,7 @@ services:
       - db
 
   db:
-    env_file: ./docker/.env
+    env_file: ./docker/db/.env
     image: postgres:12
     container_name: validol_db
     volumes:
