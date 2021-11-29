@@ -40,6 +40,8 @@ services:
     env_file: ./docker/db/.env
     image: postgres:12
     container_name: validol_db
+    ports:
+      - 5432:5432
     volumes:
       - db_home:/var/lib/postgresql/data
 
