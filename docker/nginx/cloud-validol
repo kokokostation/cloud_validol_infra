@@ -13,4 +13,12 @@ server {
 	location / {
 		proxy_pass http://superset:8088;
 	}
+
+	location /admin-api/ {
+	    proxy_pass http://loader:8080/;
+	}
+
+	location /admin/ {
+	    proxy_pass http://loader:4000/
+	}
 }
