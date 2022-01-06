@@ -19,6 +19,6 @@ server {
 	}
 
 	location /admin/ {
-	    proxy_pass http://loader:4000/
+	    proxy_pass http://loader:4000/;
 	}
 }
