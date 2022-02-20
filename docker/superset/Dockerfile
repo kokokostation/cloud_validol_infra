@@ -1,6 +1,6 @@
 FROM apache/superset
 
-RUN pip install psycopg2==2.8.6 and psycopg2-binary==2.8.6
+COPY ./superset_config.py /app/pythonpath
 RUN superset fab create-admin \
     --username admin \
     --firstname Alexander \
@@ -8,5 +8,4 @@ RUN superset fab create-admin \
     --email kokokostation@gmail.com \
     --password admin
 RUN superset db upgrade
-RUN superset load_examples
 RUN superset init
