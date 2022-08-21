@@ -9,6 +9,8 @@ RUN pip3 install cloud-validol supervisor
 COPY crontab /root
 RUN crontab /root/crontab
 
+RUN mkdir /var/log/validol
+
 RUN git clone https://github.com/kokokostation/cloud_validol_frontend.git /root/cloud_validol_frontend
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
